@@ -133,20 +133,33 @@ export const Stage06HiddenHearts: React.FC<Stage06HiddenHeartsProps> = ({ settin
         )}
       </div>
 
-      {/* Bottom Unlocked Action Button */}
-      {isAllFound && (
-        <div className="w-full text-center z-20 animate-in zoom-in-95 pt-2">
+      {/* Action Navigation Controls */}
+      <div className="w-full flex flex-col sm:flex-row items-center justify-center gap-3 z-20 pt-2">
+        {!isAllFound && (
           <button
-            id="open-birthday-gift-btn"
-            onClick={handleOpenGift}
-            className="px-10 py-4 rounded-full bg-gradient-to-r from-amber-500 via-rose-600 to-pink-600 hover:from-amber-400 hover:to-pink-500 text-white font-bold text-base sm:text-lg shadow-[0_0_40px_rgba(244,63,94,0.6)] hover:shadow-[0_0_60px_rgba(244,63,94,0.9)] transition-all transform hover:-translate-y-1 inline-flex items-center gap-3 animate-pulse"
+            id="reveal-all-hearts-btn"
+            onClick={() => {
+              setFoundHeartIds(DEFAULT_HEARTS.map((h) => h.id));
+              audioEngine.playFanfare();
+              launchHeartConfetti(0.5, 0.4);
+            }}
+            className="px-5 py-2.5 rounded-full bg-rose-950/70 hover:bg-rose-900/90 border border-rose-600/40 text-rose-200 text-xs font-medium transition-all flex items-center gap-2"
           >
-            <Gift className="w-6 h-6 text-white" />
-            <span>Open Your Birthday Gift 🎁</span>
-            <ArrowRight className="w-5 h-5 text-white" />
+            <Sparkles className="w-3.5 h-3.5 text-amber-300" />
+            <span>Find All Secret Stars For Me ✨</span>
           </button>
-        </div>
-      )}
+        )}
+
+        <button
+          id="open-birthday-gift-btn"
+          onClick={handleOpenGift}
+          className="px-8 py-3.5 rounded-full bg-gradient-to-r from-amber-500 via-rose-600 to-pink-600 hover:from-amber-400 hover:to-pink-500 text-white font-bold text-sm sm:text-base shadow-[0_0_30px_rgba(244,63,94,0.5)] transition-all transform hover:scale-105 inline-flex items-center gap-2.5"
+        >
+          <Gift className="w-5 h-5 text-white" />
+          <span>Open Your Birthday Gift 🎁</span>
+          <ArrowRight className="w-4 h-4 text-white" />
+        </button>
+      </div>
     </div>
   );
 };

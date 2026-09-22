@@ -62,14 +62,22 @@ export const Stage10SecretMessage: React.FC<Stage10SecretMessageProps> = ({ sett
             Before we open the envelope, there's a private reflection that lives deep in my quietest thoughts.
           </p>
 
-          <div className="pt-4">
+          <div className="pt-4 flex flex-col sm:flex-row items-center justify-center gap-3">
             <button
               id="reveal-secret-trigger-btn"
               onClick={handleRevealSecret}
               className="group px-8 py-4 rounded-full bg-gradient-to-r from-purple-900 via-rose-900 to-indigo-950 border border-rose-400/60 hover:border-rose-300 text-rose-100 hover:text-white font-medium text-sm sm:text-base shadow-[0_0_25px_rgba(244,63,94,0.3)] hover:shadow-[0_0_40px_rgba(244,63,94,0.6)] transition-all transform hover:scale-105 active:scale-95 inline-flex items-center gap-2.5"
             >
               <Eye className="w-4 h-4 text-amber-300 group-hover:animate-pulse" />
-              <span>Psst... there's one more thing 👀</span>
+              <span>Psst... there&apos;s one more thing 👀</span>
+            </button>
+            <button
+              id="secret-skip-btn"
+              onClick={handleNext}
+              className="px-5 py-2.5 rounded-full bg-rose-950/60 hover:bg-rose-900/80 border border-rose-600/40 text-rose-200 text-xs font-medium transition-all flex items-center gap-1.5"
+            >
+              <span>Skip to Love Letter 💌</span>
+              <ArrowRight className="w-3.5 h-3.5" />
             </button>
           </div>
         </div>
@@ -106,18 +114,25 @@ export const Stage10SecretMessage: React.FC<Stage10SecretMessageProps> = ({ sett
             )}
           </div>
 
-          {stepIndex >= 4 && (
-            <div className="pt-6 border-t border-rose-900/30 animate-in fade-in duration-700">
+          <div className="pt-6 border-t border-rose-900/30 flex flex-col sm:flex-row items-center justify-center gap-3">
+            {stepIndex < 4 && (
               <button
-                id="secret-proceed-btn"
-                onClick={handleNext}
-                className="px-8 py-4 rounded-full bg-gradient-to-r from-rose-600 via-pink-600 to-rose-500 hover:from-rose-500 hover:to-pink-500 text-white font-semibold text-base shadow-[0_0_30px_rgba(244,63,94,0.4)] transition-all inline-flex items-center gap-2"
+                onClick={() => setStepIndex(4)}
+                className="px-5 py-2.5 rounded-full bg-rose-950/70 hover:bg-rose-900 border border-rose-600/40 text-rose-200 text-xs transition-colors flex items-center gap-1.5"
               >
-                <span>Next: Love Letter From Your Husband 💌</span>
-                <ArrowRight className="w-5 h-5" />
+                <Sparkles className="w-3.5 h-3.5 text-amber-300" />
+                <span>Show All Words Instantly</span>
               </button>
-            </div>
-          )}
+            )}
+            <button
+              id="secret-proceed-btn"
+              onClick={handleNext}
+              className="px-8 py-4 rounded-full bg-gradient-to-r from-rose-600 via-pink-600 to-rose-500 hover:from-rose-500 hover:to-pink-500 text-white font-semibold text-base shadow-[0_0_30px_rgba(244,63,94,0.4)] transition-all inline-flex items-center gap-2 hover:scale-105"
+            >
+              <span>Next: Love Letter From Your Husband 💌</span>
+              <ArrowRight className="w-5 h-5" />
+            </button>
+          </div>
         </div>
       )}
     </div>

@@ -148,6 +148,17 @@ export const Stage04Quiz: React.FC<Stage04QuizProps> = ({ settings, onProceed })
               </div>
             </div>
           )}
+
+          {/* Quick skip option */}
+          <div className="pt-2 flex justify-center border-t border-rose-900/30">
+            <button
+              id="quiz-skip-btn"
+              onClick={handleProceed}
+              className="text-xs text-rose-300/70 hover:text-rose-200 transition-colors flex items-center gap-1 py-1 px-3 rounded-full hover:bg-rose-950/40"
+            >
+              <span>Skip Quiz &amp; Continue to Memory Game ➡️</span>
+            </button>
+          </div>
         </div>
       ) : (
         /* Score Card Screen */

@@ -37,8 +37,11 @@ export default function App() {
           parsed.wifeName = 'My Wife';
           parsed.nickname = 'My Wife';
         }
+        if (!parsed.couplePhoto || parsed.couplePhoto.includes('sheena_couple_studio')) {
+          parsed.couplePhoto = '/photos/our_real_pic.png';
+        }
         if (parsed.wifeName && parsed.wifeName !== 'My Beautiful Wife') {
-          return { ...DEFAULT_SETTINGS, ...parsed };
+          return { ...DEFAULT_SETTINGS, ...parsed, couplePhoto: parsed.couplePhoto || '/photos/our_real_pic.png' };
         }
       }
     } catch {}
@@ -100,7 +103,10 @@ export default function App() {
   return (
     <div className="relative min-h-screen bg-[#090813] text-[#fdf6f7] overflow-x-hidden font-sans">
       {/* Top Reading/Journey Progress Heart Indicator */}
-      <TopProgressBar currentStageId={currentStageId} />
+      <TopProgressBar
+        currentStageId={currentStageId}
+        onSelectStage={(stageId) => advanceToStage(stageId)}
+      />
 
       {/* Background Starlight, Floating Hearts, and Interactive Particle Trail */}
       <BackgroundStars />

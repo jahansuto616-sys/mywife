@@ -49,31 +49,27 @@ export const StageNav: React.FC<StageNavProps> = ({
         {isOpen && (
           <div className="absolute top-full left-0 mt-2 w-64 bg-[#140b22]/95 backdrop-blur-xl border border-rose-500/30 rounded-2xl shadow-2xl p-2 z-50 animate-in fade-in zoom-in-95">
             <div className="px-3 py-2 border-b border-rose-900/40 text-xs text-rose-300/80 font-medium flex items-center justify-between">
-              <span>Chapters & Surprises</span>
-              <span className="text-[10px] bg-rose-900/50 px-2 py-0.5 rounded-full">
-                {highestUnlockedStageIndex}/12 Unlocked
+              <span>All 12 Chapters &amp; Surprises</span>
+              <span className="text-[10px] bg-rose-900/50 px-2 py-0.5 rounded-full text-rose-300">
+                Tap Any Chapter
               </span>
             </div>
             <div className="max-h-72 overflow-y-auto py-1 space-y-1">
               {STAGES.map((stg) => {
-                const isUnlocked = stg.index <= highestUnlockedStageIndex;
                 const isCurrent = stg.id === currentStageId;
 
                 return (
                   <button
                     key={stg.id}
                     id={`nav-stage-item-${stg.id}`}
-                    disabled={!isUnlocked}
                     onClick={() => {
                       onSelectStage(stg.id);
                       setIsOpen(false);
                     }}
                     className={`w-full flex items-center justify-between px-3 py-2 rounded-xl text-left text-xs transition-all ${
                       isCurrent
-                        ? 'bg-rose-500/20 text-white font-semibold border border-rose-500/40'
-                        : isUnlocked
-                        ? 'text-rose-200/90 hover:bg-rose-500/10 hover:text-white'
-                        : 'text-rose-400/30 cursor-not-allowed'
+                        ? 'bg-rose-500/20 text-white font-semibold border border-rose-500/40 shadow-sm'
+                        : 'text-rose-200/90 hover:bg-rose-500/10 hover:text-white'
                     }`}
                   >
                     <div className="flex items-center gap-2">
@@ -84,10 +80,8 @@ export const StageNav: React.FC<StageNavProps> = ({
                     </div>
                     {isCurrent ? (
                       <Heart className="w-3 h-3 fill-rose-500 text-rose-500" />
-                    ) : isUnlocked ? (
-                      <ChevronRight className="w-3 h-3 text-rose-400/60" />
                     ) : (
-                      <span className="text-[10px] text-rose-500/40">🔒</span>
+                      <ChevronRight className="w-3 h-3 text-rose-400/60" />
                     )}
                   </button>
                 );
@@ -141,11 +135,11 @@ export const StageNav: React.FC<StageNavProps> = ({
       <button
         id="open-customize-btn"
         onClick={onOpenCustomize}
-        className="flex items-center gap-1.5 bg-[#170e24]/80 backdrop-blur-md border border-rose-500/30 px-3 py-1.5 rounded-full text-xs text-rose-300 hover:text-white hover:border-rose-400 transition-all shadow-lg"
-        title="Customize Names, Photos & Message"
+        className="flex items-center gap-1.5 bg-[#170e24]/90 backdrop-blur-md border border-rose-500/40 px-3 py-1.5 rounded-full text-xs text-rose-200 hover:text-white hover:border-rose-300 transition-all shadow-lg"
+        title="Customize Names, Couple Photo, Timeline & Message"
       >
-        <Sliders className="w-3.5 h-3.5" />
-        <span className="hidden sm:inline">Personalize</span>
+        <Sliders className="w-3.5 h-3.5 text-pink-400" />
+        <span>Personalize</span>
       </button>
     </header>
   );

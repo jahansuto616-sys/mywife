@@ -19,6 +19,7 @@ export const DEFAULT_SETTINGS: AppSettings = {
   wifeName: 'My Wife',
   nickname: 'My Wife',
   husbandName: 'Your Loving Husband',
+  couplePhoto: '/photos/our_real_pic.png',
   birthdayDate: 'September 23',
   ageNumber: 23,
   welcomeQuote: "Today isn't just another day...\nToday is the day the world became a little more beautiful because you were born, my love.",

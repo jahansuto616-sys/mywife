@@ -5,16 +5,29 @@ import { Heart } from 'lucide-react';
 
 interface TopProgressBarProps {
   currentStageId: StageId;
+  onSelectStage?: (stageId: StageId) => void;
 }
 
-export const TopProgressBar: React.FC<TopProgressBarProps> = ({ currentStageId }) => {
+export const TopProgressBar: React.FC<TopProgressBarProps> = ({ currentStageId, onSelectStage }) => {
   const currentStage = STAGES.find((s) => s.id === currentStageId) || STAGES[0];
   const progressPercent = Math.min(100, Math.max(8, Math.round((currentStage.index / STAGES.length) * 100)));
 
   return (
-    <div className="fixed top-0 left-0 right-0 z-50 pointer-events-none h-1 bg-white/5 backdrop-blur-sm">
+    <div className="fixed top-0 left-0 right-0 z-50 h-2 bg-black/40 backdrop-blur-sm group cursor-pointer">
+      {/* 12 stage segments */}
+      <div className="absolute inset-0 flex">
+        {STAGES.map((stg) => (
+          <div
+            key={stg.id}
+            onClick={() => onSelectStage?.(stg.id)}
+            title={`Jump to: ${stg.index}. ${stg.title}`}
+            className="flex-1 h-full border-r border-rose-900/30 hover:bg-rose-500/20 transition-colors"
+          />
+        ))}
+      </div>
+
       <div
-        className="h-full bg-gradient-to-r from-rose-600 via-pink-500 to-amber-300 transition-all duration-700 ease-out relative shadow-[0_0_12px_rgba(244,63,94,0.8)]"
+        className="h-full bg-gradient-to-r from-rose-600 via-pink-500 to-amber-300 transition-all duration-700 ease-out relative shadow-[0_0_12px_rgba(244,63,94,0.8)] pointer-events-none"
         style={{ width: `${progressPercent}%` }}
       >
         {/* Glowing tip indicator */}

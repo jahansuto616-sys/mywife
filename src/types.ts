@@ -34,6 +34,7 @@ export interface AppSettings {
   wifeName: string;
   nickname: string;
   husbandName: string;
+  couplePhoto?: string;
   birthdayDate: string; // e.g. "September 23"
   ageNumber: number; // e.g. 23
   welcomeQuote: string;

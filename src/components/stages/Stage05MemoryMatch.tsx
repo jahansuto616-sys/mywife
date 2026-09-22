@@ -59,6 +59,15 @@ export const Stage05MemoryMatch: React.FC<Stage05MemoryMatchProps> = ({ settings
     setIsCompleted(false);
   };
 
+  const handleRevealAll = () => {
+    audioEngine.playFanfare();
+    launchHeartConfetti(0.5, 0.4);
+    setCards((prev) => prev.map((c) => ({ ...c, isFlipped: true, isMatched: true })));
+    setIsCompleted(true);
+    setSelectedCards([]);
+    setIsLocked(false);
+  };
+
   useEffect(() => {
     setupGame();
   }, [settings.photos]);
@@ -150,9 +159,16 @@ export const Stage05MemoryMatch: React.FC<Stage05MemoryMatchProps> = ({ settings
           </div>
         </div>
 
-        <p className="text-xs sm:text-sm text-rose-300/80">
-          Flip the cards to match pairs of our favorite memories. Match all 6 pairs to unlock the next romantic secret!
-        </p>
+        <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2 text-xs sm:text-sm text-rose-300/80">
+          <p>
+            Flip the cards to match pairs of our favorite memories, or click &quot;Reveal All&quot; to see every photo immediately!
+          </p>
+          <div className="flex items-center gap-2 shrink-0 bg-[#21113b] px-3 py-1.5 rounded-xl border border-rose-800/40">
+            <span className="text-xs text-rose-300 font-medium">
+              Pairs: {Math.floor(cards.filter((c) => c.isMatched).length / 2)} / {Math.floor(cards.length / 2)}
+            </span>
+          </div>
+        </div>
 
         {/* Card Grid (12 cards) */}
         <div className="grid grid-cols-3 sm:grid-cols-4 md:grid-cols-6 gap-3 sm:gap-4 py-2">
@@ -196,6 +212,33 @@ export const Stage05MemoryMatch: React.FC<Stage05MemoryMatchProps> = ({ settings
           })}
         </div>
 
+        {/* Action Controls Bar */}
+        <div className="flex flex-col sm:flex-row items-center justify-between gap-3 pt-3 border-t border-rose-900/40">
+          {!isCompleted ? (
+            <button
+              id="reveal-all-memories-btn"
+              onClick={handleRevealAll}
+              className="w-full sm:w-auto px-5 py-2.5 rounded-full bg-rose-950/70 hover:bg-rose-900/90 border border-rose-600/50 text-rose-200 hover:text-white text-xs sm:text-sm font-medium transition-all flex items-center justify-center gap-2 shadow-sm"
+            >
+              <Sparkles className="w-4 h-4 text-amber-300" />
+              <span>Reveal All Memories 💖</span>
+            </button>
+          ) : (
+            <div className="text-xs text-emerald-300 flex items-center gap-1.5">
+              <Sparkles className="w-4 h-4" /> All memory pairs unlocked!
+            </div>
+          )}
+
+          <button
+            id="memory-match-continue-btn"
+            onClick={handleNext}
+            className="w-full sm:w-auto px-7 py-3 rounded-full bg-gradient-to-r from-rose-600 via-pink-600 to-rose-500 hover:from-rose-500 hover:to-pink-500 text-white font-semibold text-xs sm:text-sm shadow-lg shadow-rose-950/50 hover:shadow-rose-900/80 transition-all flex items-center justify-center gap-2"
+          >
+            <span>Continue to Next Chapter ➡️</span>
+            <ArrowRight className="w-4 h-4" />
+          </button>
+        </div>
+
         {/* Victory Banner */}
         {isCompleted && (
           <div className="p-6 bg-gradient-to-r from-rose-950/80 to-purple-950/80 border border-rose-400/60 rounded-2xl text-center space-y-3 animate-in zoom-in-95">
@@ -206,13 +249,13 @@ export const Stage05MemoryMatch: React.FC<Stage05MemoryMatchProps> = ({ settings
               Every Memory Belongs Together — Just Like Us! ❤️
             </h4>
             <p className="text-sm text-rose-200 max-w-md mx-auto">
-              You solved the matching game in {moves} moves! Now, let's explore the hidden treasures in our starry sky.
+              You unlocked all our cherished moments! Now, let&apos;s explore the hidden treasures in our starry sky.
             </p>
             <div className="pt-2">
               <button
                 id="memory-match-proceed-btn"
                 onClick={handleNext}
-                className="px-8 py-3.5 rounded-full bg-gradient-to-r from-rose-600 to-pink-600 hover:from-rose-500 hover:to-pink-500 text-white font-semibold shadow-lg shadow-rose-950 transition-all inline-flex items-center gap-2"
+                className="px-8 py-3.5 rounded-full bg-gradient-to-r from-rose-600 to-pink-600 hover:from-rose-500 hover:to-pink-500 text-white font-semibold shadow-lg shadow-rose-950 transition-all inline-flex items-center gap-2 hover:scale-105"
               >
                 <span>Proceed: Unlock My Heart (5 Hidden Stars) 💎</span>
                 <ArrowRight className="w-5 h-5" />

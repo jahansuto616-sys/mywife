@@ -133,18 +133,28 @@ export const Stage09BirthdayCake: React.FC<Stage09BirthdayCakeProps> = ({ settin
           </div>
 
           {!candlesBlown ? (
-            <button
-              id="blow-candles-click-btn"
-              onClick={handleBlowCandles}
-              className="mt-6 px-6 py-2.5 rounded-full bg-rose-600/40 hover:bg-rose-600/70 border border-rose-400/50 text-white text-xs sm:text-sm font-semibold transition-all animate-pulse"
-            >
-              💨 Click the candles to blow them out!
-            </button>
+            <div className="flex flex-col sm:flex-row items-center justify-center gap-3 mt-6">
+              <button
+                id="blow-candles-click-btn"
+                onClick={handleBlowCandles}
+                className="px-6 py-3 rounded-full bg-gradient-to-r from-amber-500 via-rose-600 to-pink-600 hover:from-amber-400 hover:to-pink-500 text-white text-xs sm:text-sm font-semibold transition-all shadow-lg animate-pulse"
+              >
+                💨 Blow Candles &amp; Make a Wish! 🎂
+              </button>
+              <button
+                id="cake-quick-proceed-btn"
+                onClick={handleNext}
+                className="px-5 py-2.5 rounded-full bg-rose-950/60 hover:bg-rose-900/80 border border-rose-600/40 text-rose-200 text-xs font-medium transition-all flex items-center gap-1.5"
+              >
+                <span>Continue to Next Chapter ➡️</span>
+                <ArrowRight className="w-3.5 h-3.5" />
+              </button>
+            </div>
           ) : (
             <button
               id="relight-candles-btn"
               onClick={handleRelight}
-              className="mt-4 px-4 py-1.5 rounded-full bg-white/5 hover:bg-white/10 text-rose-300 text-xs transition-colors flex items-center gap-1.5"
+              className="mt-4 px-4 py-1.5 rounded-full bg-white/5 hover:bg-white/10 text-rose-300 text-xs transition-colors flex items-center gap-1.5 mx-auto"
             >
               <RotateCcw className="w-3 h-3" />
               <span>Relight Candles</span>

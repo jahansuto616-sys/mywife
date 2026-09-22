@@ -178,6 +178,63 @@ export const PersonalizeModal: React.FC<PersonalizeModalProps> = ({
                 />
               </div>
 
+              {/* Our Real Couple Photo (Hero Avatar / Grand Finale) */}
+              <div className="p-4 rounded-2xl bg-[#1e1133] border border-rose-700/60 shadow-lg space-y-3">
+                <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2">
+                  <div>
+                    <label className="block text-xs font-bold text-rose-200 uppercase tracking-wider flex items-center gap-1.5">
+                      <Heart className="w-3.5 h-3.5 text-rose-400 fill-rose-400" />
+                      <span>Our Real Couple Picture (Hero Avatar)</span>
+                    </label>
+                    <p className="text-[11px] text-rose-300/80">
+                      Displayed in the circular halo on the Grand Finale and eternal keepsakes.
+                    </p>
+                  </div>
+                  <label className="cursor-pointer self-start sm:self-auto bg-gradient-to-r from-rose-600 to-pink-600 hover:from-rose-500 hover:to-pink-500 text-white text-xs font-medium px-3 py-1.5 rounded-xl border border-rose-400/40 flex items-center gap-1.5 shadow-sm transition-transform active:scale-95">
+                    <ImageIcon className="w-3.5 h-3.5" />
+                    <span>Change / Upload Photo</span>
+                    <input
+                      type="file"
+                      accept="image/*"
+                      className="hidden"
+                      onChange={(e) => {
+                        const file = e.target.files?.[0];
+                        if (file) {
+                          const url = URL.createObjectURL(file);
+                          handleChange('couplePhoto', url);
+                        }
+                      }}
+                    />
+                  </label>
+                </div>
+
+                <div className="flex items-center gap-4 pt-1">
+                  <div className="w-16 h-16 sm:w-20 sm:h-20 rounded-full p-1 bg-gradient-to-tr from-rose-500 via-pink-400 to-amber-300 shadow-[0_0_20px_rgba(244,63,94,0.6)] shrink-0">
+                    <img
+                      src={formData.couplePhoto || '/photos/our_real_pic.png'}
+                      alt="Couple Avatar Preview"
+                      className="w-full h-full object-cover object-[center_20%] rounded-full"
+                    />
+                  </div>
+                  <div className="flex-1 space-y-1.5">
+                    <input
+                      type="text"
+                      value={formData.couplePhoto || ''}
+                      onChange={(e) => handleChange('couplePhoto', e.target.value)}
+                      placeholder="/photos/our_real_pic.png or URL"
+                      className="w-full bg-[#2a1744] border border-rose-900/60 rounded-lg px-2.5 py-1.5 text-xs text-white"
+                    />
+                    <button
+                      type="button"
+                      onClick={() => handleChange('couplePhoto', '/photos/our_real_pic.png')}
+                      className="text-[11px] text-amber-300 hover:text-amber-200 underline font-medium"
+                    >
+                      Use Default Real Couple Photo (Uploaded)
+                    </button>
+                  </div>
+                </div>
+              </div>
+
               <div>
                 <label className="block text-xs font-semibold text-rose-300 uppercase tracking-wider mb-1">
                   Welcome Screen Quote
@@ -195,9 +252,48 @@ export const PersonalizeModal: React.FC<PersonalizeModalProps> = ({
 
           {activeTab === 'photos' && (
             <div className="space-y-4">
-              <p className="text-xs text-rose-300/80">
-                You can upload your own photos or paste image URLs. Each photo appears in the timeline and the "10 Reasons I Love You" interactive cards!
-              </p>
+              {/* Couple Hero Photo Feature */}
+              <div className="p-3.5 bg-gradient-to-r from-[#24133d] to-[#1c0d30] rounded-2xl border border-rose-500/40 flex items-center justify-between gap-3 shadow-md">
+                <div className="flex items-center gap-3">
+                  <div className="w-14 h-14 rounded-full p-0.5 bg-gradient-to-tr from-rose-500 via-pink-400 to-amber-300 shrink-0">
+                    <img
+                      src={formData.couplePhoto || '/photos/our_real_pic.png'}
+                      alt="Couple Real Photo"
+                      className="w-full h-full object-cover object-[center_20%] rounded-full"
+                    />
+                  </div>
+                  <div>
+                    <h4 className="text-xs font-bold text-white flex items-center gap-1.5">
+                      <Heart className="w-3.5 h-3.5 text-rose-400 fill-rose-400" />
+                      Our Couple Picture (Hero Avatar)
+                    </h4>
+                    <p className="text-[11px] text-rose-300/80">
+                      Used for the final surprise and romantic halo.
+                    </p>
+                  </div>
+                </div>
+                <label className="cursor-pointer bg-rose-600 hover:bg-rose-500 text-white text-xs px-3 py-1.5 rounded-xl border border-rose-400/50 flex items-center gap-1.5 shrink-0 shadow-sm">
+                  <ImageIcon className="w-3.5 h-3.5" />
+                  <span>Change Photo</span>
+                  <input
+                    type="file"
+                    accept="image/*"
+                    className="hidden"
+                    onChange={(e) => {
+                      const file = e.target.files?.[0];
+                      if (file) {
+                        const url = URL.createObjectURL(file);
+                        handleChange('couplePhoto', url);
+                      }
+                    }}
+                  />
+                </label>
+              </div>
+
+              <div className="flex items-center justify-between text-xs text-rose-300/80 pt-1">
+                <span>10 Memories &amp; Reasons Photos:</span>
+                <span className="text-[10px] text-rose-400/80">Upload custom photos or paste URLs</span>
+              </div>
               <div className="space-y-4">
                 {formData.photos.map((photo, idx) => (
                   <div key={photo.id} className="p-3 bg-[#1e1133] rounded-2xl border border-rose-900/50 space-y-2">

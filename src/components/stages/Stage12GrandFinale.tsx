@@ -54,12 +54,12 @@ export const Stage12GrandFinale: React.FC<Stage12GrandFinaleProps> = ({
       <div className="w-full bg-[#0d071a]/90 backdrop-blur-2xl border border-rose-500/30 rounded-3xl p-8 sm:p-14 shadow-[0_0_80px_rgba(244,63,94,0.25)] space-y-8">
         {/* Soft introduction */}
         <div className="space-y-4 flex flex-col items-center">
-          <div className="w-24 h-24 sm:w-28 sm:h-28 rounded-full p-1 bg-gradient-to-tr from-rose-500 via-pink-400 to-amber-300 shadow-[0_0_40px_rgba(244,63,94,0.6)]">
+          <div className="w-28 h-28 sm:w-36 sm:h-36 rounded-full p-1.5 bg-gradient-to-tr from-rose-500 via-pink-400 to-amber-300 shadow-[0_0_50px_rgba(244,63,94,0.7)]">
             <img
-              src="/photos/sheena_couple_studio.jpg"
+              src={settings.couplePhoto || "/photos/our_real_pic.png"}
               alt="Forever in Love"
               referrerPolicy="no-referrer"
-              className="w-full h-full object-cover rounded-full"
+              className="w-full h-full object-cover object-[center_22%] rounded-full shadow-inner"
             />
           </div>
           <p className="font-cursive text-3xl sm:text-4xl text-rose-300 animate-pulse">
